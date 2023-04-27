@@ -21,13 +21,13 @@
     <v-card-subtitle v-if="inst.sites.length" style="white-space: unset">
       <b>网站：</b>
       <template v-for="(loc, idx) in inst.sites" :key="idx">
-        <p v-if="!idx || expandAddress">{{ loc }}</p>
+        <p v-if="!idx || expandLink">{{ loc }}</p>
       </template>
       <v-chip
-        @click="expandAddress = !expandAddress"
+        @click="expandLink = !expandLink"
         v-if="inst.sites.length > 1"
         size="x-small"
-        :text="expandAddress ? '收回' : '展开' + `(+${inst.sites.length - 1})`"
+        :text="expandLink ? '收回' : '展开' + `(+${inst.sites.length - 1})`"
       ></v-chip>
     </v-card-subtitle>
     <v-divider class="mt-2" />

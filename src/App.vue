@@ -22,6 +22,7 @@
         </v-card>
         <v-autocomplete
           v-model:model-value="searchVal"
+          :loading="loading"
           class="mb-2"
           variant="solo"
           item-title="title"
@@ -34,7 +35,13 @@
           :items="searchData"
           @update:model-value="scrollData"
         ></v-autocomplete>
-        <div class="card-container">
+        <v-card
+          v-if="loading"
+          class="text-center"
+          variant="tonal"
+          text="加载中，稍安勿躁..."
+        />
+        <div class="card-container" v-if="!loading">
           <InstCard
             v-for="(inst, idx) in data"
             :key="idx"
@@ -54,6 +61,7 @@ import InstCard from "./components/InstCard.vue";
 const searchVal = ref([]);
 const searchData = ref([]);
 const data = ref([]);
+const loading = ref(true);
 const fetchData = () => {
   fetch(
     "https://raw.githubusercontent.com/FunctionSir/TransDefenseProject/master/institute_list.json"
@@ -67,6 +75,7 @@ const fetchData = () => {
           idx: i,
         });
       }
+      loading.value = false;
     });
 };
 const scrollData = () => {};

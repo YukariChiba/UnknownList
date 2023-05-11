@@ -69,9 +69,9 @@ const fetchData = () => {
     .then((res) => res.json())
     .then((j) => {
       data.value = j["content"];
-      for (let i = 0; i < j.length; i++) {
+      for (let i = 0; i < j["content"].length; i++) {
         searchData.value.push({
-          title: j[i].names.join(","),
+          title: j["content"][i].names.join(","),
           idx: i,
         });
       }
